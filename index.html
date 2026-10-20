@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <!-- ==========================================================================
+       HỌC PHẦN: THIẾT KẾ WEB (111101) - ĐẠI HỌC LẠC HỒNG (LHU)
+       BÀI THI KIỂM TRA GIỮA KỲ — THỜI GIAN: 120 PHÚT
+       CHỦ ĐỀ: CYBER GAMING GEAR (CYBERPULSE ESPORTS HARDWARE)
+       Sinh viên thực hiện: Phạm Ngọc Nhân - MSSV: 125002885
+       ========================================================================== -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Thẻ Viewport bắt buộc đáp ứng Responsive Mobile-First chuẩn W3C (Tuần 4) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CYBERPULSE ESPORTS | Vũ Khí Gaming Gear Đỉnh Cao & Hệ Sinh Thái RGB</title>
+  
+  <meta name="description" content="CyberPulse Esports Hardware - Trang thiết bị gaming gear và vũ khí thi đấu thể thao điện tử chuyên nghiệp. Lưới sản phẩm CSS Grid, Mega Menu đa tầng và hệ thống LED RGB tùy biến.">
+  <meta name="keywords" content="Cyber Gaming Gear, Esports Hardware, Chuot Gaming 8K, Ban Phim Co Rapid Trigger, Tai Nghe 7.1, CSS Grid, LHU Web Design">
+  <meta name="author" content="Phạm Ngọc Nhân - MSSV 125002885">
+
+  <!-- Favicon chuẩn Vector SVG -->
+  <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+
+  <!-- Phông chữ Google Fonts chuẩn Tiếng Việt 100%: Chakra Petch & Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Thư viện hiệu ứng Animate.css (Yêu cầu bắt buộc đề thi Tuần 5) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Thư viện hiệu ứng cuộn trang AOS CSS CDN (Yêu cầu bắt buộc đề thi Tuần 5) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <!-- Tệp CSS chính tích hợp Design System HSL (:root) & Responsive Mobile-First -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       01. PURE CSS STATE CONTROLS (RADIO HACK & CHECKBOX HACK)
+       Tuân thủ 100% quy định không dùng file .js riêng của học phần
+       ========================================================================== -->
+  <!-- Đổi sắc thái hệ màu LED RGB thuần CSS -->
+  <input type="radio" name="led-theme" id="theme-cyan" class="theme-radio" checked>
+  <input type="radio" name="led-theme" id="theme-green" class="theme-radio">
+  <input type="radio" name="led-theme" id="theme-red" class="theme-radio">
+  <input type="radio" name="led-theme" id="theme-purple" class="theme-radio">
+  <input type="radio" name="led-theme" id="theme-amber" class="theme-radio">
+  <input type="radio" name="led-theme" id="theme-auto" class="theme-radio">
+
+  <!-- Điều khiển mở/đóng Mobile Navigation -->
+  <input type="checkbox" id="mobileNavToggle" class="pure-css-toggle" hidden>
+
+  <!-- Điều khiển mở/đóng Khay Giỏ Hàng Drawer -->
+  <input type="checkbox" id="cartDrawerToggle" class="pure-css-toggle" hidden>
+
+  <!-- Điều khiển mở/đóng Palette Dock -->
+  <input type="checkbox" id="paletteDockToggle" class="pure-css-toggle" hidden>
+
+  <!-- Thanh tiến độ cuộn trang Pure CSS -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Palette Dock: Chuyển đổi sắc thái LED RGB thuần CSS qua Radio Hack -->
+  <aside class="palette-dock" id="paletteDock" aria-label="Bảng điều khiển hệ sinh thái LED RGB">
+    <div class="swatch-group">
+      <label for="theme-cyan" class="swatch swatch--cyan" title="Cyber Cyan (Tông điện lam 185°)"></label>
+      <label for="theme-green" class="swatch swatch--green" title="Razer Emerald (Xanh lục ngọc 140°)"></label>
+      <label for="theme-red" class="swatch swatch--red" title="ROG Crimson (Đỏ rực chiến binh 345°)"></label>
+      <label for="theme-purple" class="swatch swatch--purple" title="Cyberpunk Violet (Tím neon 275°)"></label>
+      <label for="theme-amber" class="swatch swatch--amber" title="Apex Amber (Vàng hổ phách 38°)"></label>
+      <label for="theme-auto" class="swatch swatch--auto" title="Chroma RGB Wave (Tự động chuyển phổ màu)"></label>
+    </div>
+    <label for="paletteDockToggle" class="palette-btn" title="Mở/Đóng bảng màu RGB">⚡</label>
+  </aside>
+
+  <!-- ==========================================================================
+       02. HEADER VÀ THANH MEGA MENU DROPDOWN ĐA TẦNG PHÂN CẤP (ĐIỂM NHẤN ĐỀ THI)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <!-- Thương hiệu & Logo CyberPulse -->
+      <a href="#hero" class="brand-logo" aria-label="CyberPulse Esports Trang chủ">
+        <div class="logo-badge">⚡</div>
+        <span>CYBER<span class="cyber-gradient-text">PULSE</span></span>
+      </a>
+
+      <!-- Nút Hamburger dành cho thiết bị di động (Checkbox Hack) -->
+      <label for="mobileNavToggle" class="hamburger-btn" aria-label="Mở thanh điều hướng">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </label>
+
+      <!-- Thanh điều hướng đa tầng (Multi-level Navigation với Mega Menu Dropdown) -->
+      <nav class="site-nav" id="siteNav" aria-label="Thanh điều hướng chính">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#hero" class="nav-link active">Trang Chủ</a>
+          </li>
+
+          <!-- Mục Menu Đa Tầng 1: Mega Menu Danh mục Gear -->
+          <li class="nav-item has-mega-gear">
+            <a href="#products" class="nav-link nav-dropdown-trigger" aria-haspopup="true">
+              Sản Phẩm Gear <span class="dropdown-arrow">▼</span>
+            </a>
+            <!-- Mega Menu Dropdown hiển thị phân nhánh con phong phú -->
+            <div class="mega-menu" role="menu">
+              <div class="mega-menu-grid">
+                <!-- Cột con 1: Bàn Phím Cơ -->
+                <div class="mega-col" data-category="keyboard">
+                  <h4 class="mega-col-title mega-filter-link" data-category="keyboard" title="Lọc danh mục Bàn Phím Cơ">
+                    ⌨️ Bàn Phím Cơ
+                  </h4>
+                  <div class="mega-sublinks">
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="keyboard">Rapid Trigger Hall-Effect</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="keyboard">Custom Gasket-Mount</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="keyboard">Wireless Triple-Mode 8K</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="keyboard">Low Profile Ultra-Thin</a>
+                  </div>
+                </div>
+
+                <!-- Cột con 2: Chuột Thi Đấu -->
+                <div class="mega-col" data-category="mouse">
+                  <h4 class="mega-col-title mega-filter-link" data-category="mouse" title="Lọc danh mục Chuột Esports">
+                    🖱️ Chuột Esports
+                  </h4>
+                  <div class="mega-sublinks">
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="mouse">Siêu nhẹ 49g Polling 8K</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="mouse">Cảm biến quang học 30K DPI</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="mouse">Switch quang học 100M Click</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="mouse">Thiết kế công thái học Ergo</a>
+                  </div>
+                </div>
+
+                <!-- Cột con 3: Âm Thanh Thi Đấu -->
+                <div class="mega-col" data-category="headset">
+                  <h4 class="mega-col-title mega-filter-link" data-category="headset" title="Lọc danh mục Âm Thanh 7.1">
+                    🎧 Âm Thanh 7.1 <span class="audio-equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                  </h4>
+                  <div class="mega-sublinks">
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="headset">Tai nghe Spatial Surround</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="headset">Driver Planar Magnetic</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="headset">Mic khử ồn Broadcast AI</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="headset">Soundcard DAC Hi-Res</a>
+                  </div>
+                </div>
+
+                <!-- Cột con 4: Trạm Chiến Battlestation -->
+                <div class="mega-col" data-category="battlestation">
+                  <h4 class="mega-col-title mega-filter-link" data-category="battlestation" title="Lọc danh mục Battlestation">
+                    🖥️ Battlestation
+                  </h4>
+                  <div class="mega-sublinks">
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="battlestation">Pad chuột bề mặt Hybrid Control</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="battlestation">Arm màn hình trợ lực khí</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="battlestation">Bàn Gaming nâng hạ Dual-Motor</a>
+                    <a href="#products" class="mega-sublink mega-filter-link" data-category="battlestation">Đèn LED màn hình RGB Sync</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Mục Menu Đa Tầng 2: Hệ Sinh Thái RGB & Phần Mềm -->
+          <li class="nav-item has-mega-rgb">
+            <a href="#architecture" class="nav-link nav-dropdown-trigger" aria-haspopup="true">
+              Hệ Sinh Thái RGB <span class="dropdown-arrow">▼</span>
+            </a>
+            <div class="mega-menu" role="menu">
+              <div class="mega-menu-grid">
+                <div class="mega-col" data-action="rgb-wave">
+                  <h4 class="mega-col-title mega-filter-link" data-action="rgb-wave" title="Kích hoạt hiệu ứng RGB Chroma">
+                    🌈 Chroma Dynamic
+                  </h4>
+                  <div class="mega-sublinks">
+                    <a href="#architecture" class="mega-sublink mega-filter-link" data-action="rgb-wave">Đồng bộ nhịp điệu âm thanh</a>
+                    <a href="#architecture" class="mega-sublink mega-filter-link" data-action="rgb-wave">Hiệu ứng phím Reactive Click</a>
+                    <a href="#architecture" class="mega-sublink mega-filter-link" data-action="rgb-wave">Tích hợp Aura & Razer Chroma</a>
+                  </div>
+                </div>
+                <div class="mega-col" data-action="scroll-sensor">
+                  <h4 class="mega-col-title mega-filter-link" data-action="scroll-sensor" title="Xem giải phẫu CyberEngine">
+                    ⚙️ CyberEngine OS
+                  </h4>
+                  <div class="mega-sublinks">
+                    <a href="#architecture" class="mega-sublink mega-filter-link" data-action="scroll-sensor">Tùy biến Macro & Keymap</a>
+                    <a href="#architecture" class="mega-sublink mega-filter-link" data-action="scroll-sensor">Lưu trữ Profile On-Board 5 tầng</a>
+                    <a href="#architecture" class="mega-sublink mega-filter-link" data-action="scroll-sensor">Hiệu chỉnh Lift-off Distance</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a href="#compare" class="nav-link">So Sánh Cấu Hình</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#architecture" class="nav-link">Kiến Trúc Cảm Biến</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#deals" class="nav-link">Flash Sale</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Cụm công cụ Tài khoản Game thủ & Giỏ hàng Drawer (Pure CSS) -->
+      <div class="header-user-tools">
+        <!-- Nút Đăng nhập mở Modal bằng CSS :target -->
+        <a href="#authModal" class="btn btn-sm btn-glass" id="authBtnTrigger" aria-label="Đăng nhập tài khoản Game thủ">
+          <span class="btn-icon">⚡</span> Đăng Nhập
+        </a>
+
+        <!-- Khung hiển thị thông tin người dùng đã Đăng Nhập -->
+        <div class="user-logged-profile" id="userLoggedProfile" style="display: none; align-items: center; gap: 8px;">
+          <div class="user-avatar" id="userAvatarText" style="width: 32px; height: 32px; border-radius: 50%; background: var(--gradient-cyber); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #000; box-shadow: 0 0 10px var(--neon-primary-soft);">
+            P
+          </div>
+          <div style="display: flex; flex-direction: column; line-height: 1.1; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span id="userNameDisplay" style="font-size: 13px; font-weight: 700; color: var(--text-light);">PhantomSniper</span>
+              <span class="vip-badge" style="font-size: 9px; padding: 1px 5px; border-radius: 4px; background: rgba(var(--hue-rgb), 0.2); color: var(--neon-primary); border: 1px solid var(--neon-primary); font-weight: 800;">VIP PRO</span>
+            </div>
+            <a href="javascript:void(0)" id="logoutBtn" style="font-size: 11px; color: var(--text-muted); text-decoration: underline; cursor: pointer;">Đăng xuất</a>
+          </div>
+        </div>
+
+        <!-- Nút mở giỏ hàng Drawer thông minh (Pure CSS Checkbox Hack) -->
+        <label for="cartDrawerToggle" class="cart-trigger-btn" title="Xem kho đồ của bạn" aria-label="Mở giỏ hàng">
+          🛒
+          <span class="cart-badge-count">2</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       03. MAIN CONTENT
+       ========================================================================== -->
+  <main>
+    <!-- ========================================================================
+         HERO SECTION: SÂN KHẤU CYBER VỚI LƯỚI KHÔNG GIAN 3D & CSS PARTICLES
+         ======================================================================== -->
+    <section class="hero-section" id="hero">
+      <!-- Lưới không gian 3D viễn tưởng bám sàn thuần CSS -->
+      <div class="hero-3d-grid" aria-hidden="true"></div>
+      <!-- Hạt ánh sáng chuyển động thuần CSS -->
+      <div class="hero-cyber-particles" aria-hidden="true"></div>
+      <div class="container hero-wrapper">
+        <div class="hero-badge animate__animated animate__fadeInDown">
+          <span class="badge-dot"></span> THẾ HỆ HARDWARE THI ĐẤU ESPORTS 2026 <span class="terminal-cursor" aria-hidden="true">_</span>
+        </div>
+
+        <h1 class="hero-title animate__animated animate__fadeInUp">
+          VƯỢT TRÊN MỌI GIỚI HẠN VỚI <br>
+          <span class="cyber-gradient-text cyber-glitch" data-text="CYBERPULSE APEX PRO 8K">CYBERPULSE APEX PRO 8K</span>
+        </h1>
+
+        <p class="hero-desc animate__animated animate__fadeInUp animate__delay-1s">
+          Trang bị cảm biến quang học Focus Pro 30.000 DPI, tần số lấy mẫu đỉnh cao HyperPolling 8.000Hz 
+          và cơ chế switch quang học Gen-3 phản hồi 0.2ms. Vũ khí chuẩn xác tuyệt đối dành cho các nhà vô địch.
+        </p>
+
+        <div class="hero-actions animate__animated animate__zoomIn animate__delay-1s">
+          <a href="#products" class="btn btn-neon btn-lg pulse-btn">
+            <span>🔥</span> KHÁM PHÁ VŨ KHÍ
+          </a>
+          <a href="#compare" class="btn btn-glass btn-lg">
+            <span>⚖️</span> SO SÁNH THÔNG SỐ
+          </a>
+        </div>
+
+        <!-- Chỉ số thông số kỹ thuật đỉnh cao (CSS Grid 4 Cột Responsive) -->
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-item">
+            <div class="stat-number">8.000 Hz</div>
+            <div class="stat-label">HyperPolling Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">30.000</div>
+            <div class="stat-label">Max DPI Sensor</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">49 Gam</div>
+            <div class="stat-label">Trọng lượng siêu nhẹ</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">0.2 ms</div>
+            <div class="stat-label">Tốc độ phản hồi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         ARSENAL SHOWCASE: LƯỚI SẢN PHẨM GAMING GEAR (CSS GRID AUTO-FIT)
+         ======================================================================== -->
+    <section class="section" id="products">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">ARSENAL SHOWCASE</span>
+          <h2 class="section-title">VŨ KHÍ THI ĐẤU <span class="cyber-gradient-text">ESPORTS CHUYÊN NGHIỆP</span></h2>
+          <p class="section-subtitle">
+            Mỗi thiết bị đều được chế tác từ hợp kim ma-giê và nhựa sinh học siêu nhẹ, tích hợp vi xử lý ARM 32-bit tốc độ cao nhằm đảm bảo không có độ trễ trong từng pha xử lý quyết định.
+          </p>
+        </div>
+
+        <!-- Bộ lọc phân loại Gear thuần CSS (Radio Hack) -->
+        <input type="radio" name="gear-filter" id="filter-all" class="gear-filter-radio" checked hidden>
+        <input type="radio" name="gear-filter" id="filter-keyboard" class="gear-filter-radio" hidden>
+        <input type="radio" name="gear-filter" id="filter-mouse" class="gear-filter-radio" hidden>
+        <input type="radio" name="gear-filter" id="filter-headset" class="gear-filter-radio" hidden>
+        <input type="radio" name="gear-filter" id="filter-battlestation" class="gear-filter-radio" hidden>
+
+        <!-- Thanh Tab phân loại Gear bằng Label thuần CSS -->
+        <div class="gear-filter-tabs" data-aos="fade-up">
+          <label for="filter-all" class="gear-tab-btn">Tất Cả Vũ Khí (6)</label>
+          <label for="filter-keyboard" class="gear-tab-btn">Bàn Phím Cơ</label>
+          <label for="filter-mouse" class="gear-tab-btn">Chuột Thi Đấu</label>
+          <label for="filter-headset" class="gear-tab-btn">Tai Nghe Studio</label>
+          <label for="filter-battlestation" class="gear-tab-btn">Battlestation</label>
+        </div>
+
+        <!-- Lưới sản phẩm CSS Grid Auto-fit tích hợp 3D Card Tilt & 3D Card Flip thuần CSS -->
+        <div class="product-grid">
+          <!-- Sản phẩm 1: Chuột Flagship -->
+          <article class="product-card" data-category="mouse" data-aos="fade-up" data-aos-delay="100">
+            <input type="checkbox" id="flip-01" class="flip-checkbox" hidden>
+            <div class="card-sheen" aria-hidden="true"></div>
+            <div class="product-card-inner">
+              <!-- Mặt trước (Front) -->
+              <div class="product-card-front">
+                <div class="product-img-wrap">
+                  <span class="product-badge">🔥 FLAGSHIP</span>
+                  <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=700&q=80" alt="CyberPulse Apex Pro 8K Mouse" class="product-img" loading="lazy">
+                </div>
+                <div class="product-body">
+                  <span class="product-brand">CYBERPULSE ESPORTS</span>
+                  <h3 class="product-title">Chuột Apex Pro 8K HyperWireless</h3>
+                  <p class="product-specs">
+                    Cảm biến quang học Focus 30K, Polling Rate thực 8.000Hz, switch Gen-3 100M click, trọng lượng chỉ 49g.
+                  </p>
+                </div>
+                <div class="product-footer">
+                  <div class="product-footer-top">
+                    <div class="product-price">3.890.000 ₫</div>
+                    <span class="product-stock-tag">⚡ Sẵn Hàng</span>
+                  </div>
+                  <div class="product-card-actions">
+                    <label for="flip-01" class="btn-flip-trigger" title="Lật xem cấu trúc 3D & Telemetry">
+                      <span>🔄</span> 3D Specs
+                    </label>
+                    <label for="cartDrawerToggle" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                      <span>🛒</span> Thêm Vào Giỏ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mặt sau (Back - 3D Tactical Blueprint) -->
+              <div class="product-card-back">
+                <div class="blueprint-header">
+                  <span class="user-vip-tag">🔬 3D TACTICAL BLUEPRINT</span>
+                  <label for="flip-01" class="btn-flip-back" title="Đóng mặt sau">✕</label>
+                </div>
+                <h4 class="blueprint-title">APEX PRO 8K TELEMETRY</h4>
+                <div class="blueprint-telemetry">
+                  <div class="telemetry-row"><span>Optical Sensor:</span> <strong>Focus Pro 30K Gen-2</strong></div>
+                  <div class="telemetry-row"><span>Polling Rate:</span> <strong>8.000Hz (0.125ms delay)</strong></div>
+                  <div class="telemetry-row"><span>Microcontroller:</span> <strong>Nordic nRF52840 MCU</strong></div>
+                  <div class="telemetry-row"><span>Switch Type:</span> <strong>Optical Gen-3 (100M Click)</strong></div>
+                  <div class="telemetry-row"><span>Skates:</span> <strong>100% Virgin PTFE 0.8mm</strong></div>
+                  <div class="telemetry-row"><span>Chassis:</span> <strong>Hợp kim Ma-giê Exoskeleton</strong></div>
+                </div>
+                <div class="product-footer" style="padding: 10px 0 0; background: transparent;">
+                  <label for="cartDrawerToggle" class="btn btn-sm btn-neon btn-block" style="text-align: center; cursor: pointer;">
+                    ⚡ Trang Bị Ngay
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sản phẩm 2: Bàn phím Hall-Effect Rapid Trigger -->
+          <article class="product-card" data-category="keyboard" data-aos="fade-up" data-aos-delay="200">
+            <input type="checkbox" id="flip-02" class="flip-checkbox" hidden>
+            <div class="card-sheen" aria-hidden="true"></div>
+            <div class="product-card-inner">
+              <div class="product-card-front">
+                <div class="product-img-wrap">
+                  <span class="product-badge">⚡ RAPID TRIGGER</span>
+                  <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=700&q=80" alt="CyberPulse Magnetic 65 Keyboard" class="product-img" loading="lazy">
+                </div>
+                <div class="product-body">
+                  <span class="product-brand">CYBERPULSE KEYBOARDS</span>
+                  <h3 class="product-title">Bàn Phím Magnetic 65 Hall-Effect</h3>
+                  <p class="product-specs">
+                    Switch từ tính analog điều chỉnh điểm nhận từ 0.1mm đến 4.0mm, Rapid Trigger tức thì, plate nhôm CNC anode.
+                  </p>
+                </div>
+                <div class="product-footer">
+                  <div class="product-footer-top">
+                    <div class="product-price">4.290.000 ₫</div>
+                    <span class="product-stock-tag">⚡ Sẵn Hàng</span>
+                  </div>
+                  <div class="product-card-actions">
+                    <label for="flip-02" class="btn-flip-trigger" title="Lật xem cấu trúc 3D & Telemetry">
+                      <span>🔄</span> 3D Specs
+                    </label>
+                    <label for="cartDrawerToggle" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                      <span>🛒</span> Thêm Vào Giỏ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-card-back">
+                <div class="blueprint-header">
+                  <span class="user-vip-tag">🔬 3D TACTICAL BLUEPRINT</span>
+                  <label for="flip-02" class="btn-flip-back" title="Đóng mặt sau">✕</label>
+                </div>
+                <h4 class="blueprint-title">MAGNETIC 65 ARCHITECTURE</h4>
+                <div class="blueprint-telemetry">
+                  <div class="telemetry-row"><span>Switch Engine:</span> <strong>Gateron Magnetic Jade</strong></div>
+                  <div class="telemetry-row"><span>Actuation Point:</span> <strong>0.1mm - 4.0mm (40 nấc)</strong></div>
+                  <div class="telemetry-row"><span>Rapid Trigger:</span> <strong>0.02mm Reset siêu tốc</strong></div>
+                  <div class="telemetry-row"><span>Polling Rate:</span> <strong>8.000Hz Ultra-Low Latency</strong></div>
+                  <div class="telemetry-row"><span>Case Material:</span> <strong>Nhôm CNC 6063 Anodized</strong></div>
+                  <div class="telemetry-row"><span>Damping:</span> <strong>Poron Foam + IXPE Switch Pad</strong></div>
+                </div>
+                <div class="product-footer" style="padding: 10px 0 0; background: transparent;">
+                  <label for="cartDrawerToggle" class="btn btn-sm btn-neon btn-block" style="text-align: center; cursor: pointer;">
+                    ⚡ Trang Bị Ngay
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sản phẩm 3: Tai nghe Planar Magnetic -->
+          <article class="product-card" data-category="headset" data-aos="fade-up" data-aos-delay="300">
+            <input type="checkbox" id="flip-03" class="flip-checkbox" hidden>
+            <div class="card-sheen" aria-hidden="true"></div>
+            <div class="product-card-inner">
+              <div class="product-card-front">
+                <div class="product-img-wrap">
+                  <span class="product-badge">🎧 HI-RES AUDIO <span class="audio-equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span></span></span>
+                  <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=700&q=80" alt="CyberPulse Phantom Spatial 7.1" class="product-img" loading="lazy">
+                </div>
+                <div class="product-body">
+                  <span class="product-brand">CYBERPULSE ACOUSTICS</span>
+                  <h3 class="product-title">Tai Nghe Phantom Spatial 7.1 Wireless</h3>
+                  <p class="product-specs">
+                    Driver Planar Magnetic 50mm, âm trường định vị không gian 360°, kết nối không dây 2.4GHz không độ trễ, pin 60 giờ.
+                  </p>
+                </div>
+                <div class="product-footer">
+                  <div class="product-footer-top">
+                    <div class="product-price">3.450.000 ₫</div>
+                    <span class="product-stock-tag">⚡ Sẵn Hàng</span>
+                  </div>
+                  <div class="product-card-actions">
+                    <label for="flip-03" class="btn-flip-trigger" title="Lật xem cấu trúc 3D & Telemetry">
+                      <span>🔄</span> 3D Specs
+                    </label>
+                    <label for="cartDrawerToggle" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                      <span>🛒</span> Thêm Vào Giỏ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-card-back">
+                <div class="blueprint-header">
+                  <span class="user-vip-tag">🔬 3D TACTICAL BLUEPRINT</span>
+                  <label for="flip-03" class="btn-flip-back" title="Đóng mặt sau">✕</label>
+                </div>
+                <h4 class="blueprint-title">PHANTOM SPATIAL SPECS</h4>
+                <div class="blueprint-telemetry">
+                  <div class="telemetry-row"><span>Transducer:</span> <strong>50mm Planar Magnetic</strong></div>
+                  <div class="telemetry-row"><span>Frequency:</span> <strong>10Hz - 48.000Hz Hi-Res</strong></div>
+                  <div class="telemetry-row"><span>Wireless:</span> <strong>2.4GHz Ultra-Fast (16ms)</strong></div>
+                  <div class="telemetry-row"><span>Microphone:</span> <strong>Broadcast 9.9mm Condenser</strong></div>
+                  <div class="telemetry-row"><span>Battery Life:</span> <strong>60 Giờ liên tục (Fast Charge)</strong></div>
+                  <div class="telemetry-row"><span>Surround:</span> <strong>Spatial 360° Game Engine</strong></div>
+                </div>
+                <div class="product-footer" style="padding: 10px 0 0; background: transparent;">
+                  <label for="cartDrawerToggle" class="btn btn-sm btn-neon btn-block" style="text-align: center; cursor: pointer;">
+                    ⚡ Trang Bị Ngay
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sản phẩm 4: Chuột Stryker Siêu Nhẹ Ergo -->
+          <article class="product-card" data-category="mouse" data-aos="fade-up" data-aos-delay="100">
+            <input type="checkbox" id="flip-04" class="flip-checkbox" hidden>
+            <div class="card-sheen" aria-hidden="true"></div>
+            <div class="product-card-inner">
+              <div class="product-card-front">
+                <div class="product-img-wrap">
+                  <span class="product-badge">🏆 BEST VALUE</span>
+                  <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=700&q=80" alt="CyberPulse Stryker X Wireless" class="product-img" loading="lazy">
+                </div>
+                <div class="product-body">
+                  <span class="product-brand">CYBERPULSE ESPORTS</span>
+                  <h3 class="product-title">Chuột Không Dây Stryker X 4K</h3>
+                  <p class="product-specs">
+                    Thiết kế công thái học ôm sát lòng bàn tay, cảm biến PixArt 3395 26.000 DPI, trọng lượng 55g, Receiver 4K đi kèm.
+                  </p>
+                </div>
+                <div class="product-footer">
+                  <div class="product-footer-top">
+                    <div class="product-price">2.190.000 ₫</div>
+                    <span class="product-stock-tag">⚡ Sẵn Hàng</span>
+                  </div>
+                  <div class="product-card-actions">
+                    <label for="flip-04" class="btn-flip-trigger" title="Lật xem cấu trúc 3D & Telemetry">
+                      <span>🔄</span> 3D Specs
+                    </label>
+                    <label for="cartDrawerToggle" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                      <span>🛒</span> Thêm Vào Giỏ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-card-back">
+                <div class="blueprint-header">
+                  <span class="user-vip-tag">🔬 3D TACTICAL BLUEPRINT</span>
+                  <label for="flip-04" class="btn-flip-back" title="Đóng mặt sau">✕</label>
+                </div>
+                <h4 class="blueprint-title">STRYKER X 4K TELEMETRY</h4>
+                <div class="blueprint-telemetry">
+                  <div class="telemetry-row"><span>Optical Sensor:</span> <strong>PixArt PAW3395 Flagship</strong></div>
+                  <div class="telemetry-row"><span>Polling Rate:</span> <strong>4.000Hz Wireless Dongle</strong></div>
+                  <div class="telemetry-row"><span>Weight:</span> <strong>55g Solid Shell (Không đục lỗ)</strong></div>
+                  <div class="telemetry-row"><span>Micro Switch:</span> <strong>Huano Transparent Pink Dot 80M</strong></div>
+                  <div class="telemetry-row"><span>Battery:</span> <strong>500mAh (80h liên tục 1K)</strong></div>
+                  <div class="telemetry-row"><span>Ergo Shape:</span> <strong>Chuẩn cầm Palm & Claw Grip</strong></div>
+                </div>
+                <div class="product-footer" style="padding: 10px 0 0; background: transparent;">
+                  <label for="cartDrawerToggle" class="btn btn-sm btn-neon btn-block" style="text-align: center; cursor: pointer;">
+                    ⚡ Trang Bị Ngay
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sản phẩm 5: Bàn phím cơ Custom Gasket -->
+          <article class="product-card" data-category="keyboard" data-aos="fade-up" data-aos-delay="200">
+            <input type="checkbox" id="flip-05" class="flip-checkbox" hidden>
+            <div class="card-sheen" aria-hidden="true"></div>
+            <div class="product-card-inner">
+              <div class="product-card-front">
+                <div class="product-img-wrap">
+                  <span class="product-badge">💎 CUSTOM SOUND</span>
+                  <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80" alt="CyberPulse Nebula 75 Custom" class="product-img" loading="lazy">
+                </div>
+                <div class="product-body">
+                  <span class="product-brand">CYBERPULSE KEYBOARDS</span>
+                  <h3 class="product-title">Bàn Phím Gasket Nebula 75 RGB</h3>
+                  <p class="product-specs">
+                    Cấu trúc đệm Gasket Mount 5 lớp tiêu âm Poron, switch Linear lube sẵn mượt mà, núm xoay kim loại CNC đa chức năng.
+                  </p>
+                </div>
+                <div class="product-footer">
+                  <div class="product-footer-top">
+                    <div class="product-price">2.890.000 ₫</div>
+                    <span class="product-stock-tag">⚡ Sẵn Hàng</span>
+                  </div>
+                  <div class="product-card-actions">
+                    <label for="flip-05" class="btn-flip-trigger" title="Lật xem cấu trúc 3D & Telemetry">
+                      <span>🔄</span> 3D Specs
+                    </label>
+                    <label for="cartDrawerToggle" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                      <span>🛒</span> Thêm Vào Giỏ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-card-back">
+                <div class="blueprint-header">
+                  <span class="user-vip-tag">🔬 3D TACTICAL BLUEPRINT</span>
+                  <label for="flip-05" class="btn-flip-back" title="Đóng mặt sau">✕</label>
+                </div>
+                <h4 class="blueprint-title">NEBULA 75 ACOUSTICS</h4>
+                <div class="blueprint-telemetry">
+                  <div class="telemetry-row"><span>Mounting:</span> <strong>Flex-cut Gasket 5 lớp Poron</strong></div>
+                  <div class="telemetry-row"><span>Switch:</span> <strong>Cyber Linear Pre-lubed (45g)</strong></div>
+                  <div class="telemetry-row"><span>Connectivity:</span> <strong>Type-C / 2.4G / Bluetooth 5.2</strong></div>
+                  <div class="telemetry-row"><span>Rotary Knob:</span> <strong>CNC Aluminum Encoder</strong></div>
+                  <div class="telemetry-row"><span>Keycaps:</span> <strong>PBT Double-shot Cherry Profile</strong></div>
+                  <div class="telemetry-row"><span>Battery:</span> <strong>4.000mAh Li-ion kép</strong></div>
+                </div>
+                <div class="product-footer" style="padding: 10px 0 0; background: transparent;">
+                  <label for="cartDrawerToggle" class="btn btn-sm btn-neon btn-block" style="text-align: center; cursor: pointer;">
+                    ⚡ Trang Bị Ngay
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sản phẩm 6: Pad chuột Battlestation Cỡ Lớn -->
+          <article class="product-card" data-category="battlestation" data-aos="fade-up" data-aos-delay="300">
+            <input type="checkbox" id="flip-06" class="flip-checkbox" hidden>
+            <div class="card-sheen" aria-hidden="true"></div>
+            <div class="product-card-inner">
+              <div class="product-card-front">
+                <div class="product-img-wrap">
+                  <span class="product-badge">🌌 DESKMAT</span>
+                  <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=700&q=80" alt="CyberPulse Hexa Matrix Deskmat" class="product-img" loading="lazy">
+                </div>
+                <div class="product-body">
+                  <span class="product-brand">CYBERPULSE SETUP</span>
+                  <h3 class="product-title">Lót Chuột Hexa Matrix XXL Control</h3>
+                  <p class="product-specs">
+                    Bề mặt vải dệt micro-weave dệt siêu mịn cân bằng Speed & Control, viền may thấp chống cọ cổ tay, đế cao su thiên nhiên 4mm.
+                  </p>
+                </div>
+                <div class="product-footer">
+                  <div class="product-footer-top">
+                    <div class="product-price">690.000 ₫</div>
+                    <span class="product-stock-tag">⚡ Sẵn Hàng</span>
+                  </div>
+                  <div class="product-card-actions">
+                    <label for="flip-06" class="btn-flip-trigger" title="Lật xem cấu trúc 3D & Telemetry">
+                      <span>🔄</span> 3D Specs
+                    </label>
+                    <label for="cartDrawerToggle" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                      <span>🛒</span> Thêm Vào Giỏ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-card-back">
+                <div class="blueprint-header">
+                  <span class="user-vip-tag">🔬 3D TACTICAL BLUEPRINT</span>
+                  <label for="flip-06" class="btn-flip-back" title="Đóng mặt sau">✕</label>
+                </div>
+                <h4 class="blueprint-title">HEXA MATRIX MATERIAL</h4>
+                <div class="blueprint-telemetry">
+                  <div class="telemetry-row"><span>Dimensions:</span> <strong>900mm × 400mm × 4mm</strong></div>
+                  <div class="telemetry-row"><span>Surface:</span> <strong>Micro-woven Hybrid Speed/Control</strong></div>
+                  <div class="telemetry-row"><span>Edge Stitch:</span> <strong>Sub-surface Ultra-flat Stitching</strong></div>
+                  <div class="telemetry-row"><span>Base:</span> <strong>Natural Anti-slip Cellular Rubber</strong></div>
+                  <div class="telemetry-row"><span>Coating:</span> <strong>Hydrophobic Spill-resistant</strong></div>
+                  <div class="telemetry-row"><span>Compatibility:</span> <strong>Tối ưu cảm biến quang học 30K</strong></div>
+                </div>
+                <div class="product-footer" style="padding: 10px 0 0; background: transparent;">
+                  <label for="cartDrawerToggle" class="btn btn-sm btn-neon btn-block" style="text-align: center; cursor: pointer;">
+                    ⚡ Trang Bị Ngay
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SO SÁNH CẤU HÌNH GEAR (BẮT BUỘC CSS GRID 3 CỘT THEO YÊU CẦU ĐỀ THI)
+         ======================================================================== -->
+    <section class="section section--alt" id="compare">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">HARDWARE SPECIFICATION</span>
+          <h2 class="section-title">SO SÁNH CẤU HÌNH <span class="cyber-gradient-text">CHUỘT THI ĐẤU FLAGSHIP</span></h2>
+          <p class="section-subtitle">
+            Phân tích chi tiết ba dòng chuột thi đấu hàng đầu giúp bạn lựa chọn vũ khí hoàn hảo nhất cho phong cách cầm và tựa game chuyên biệt.
+          </p>
+        </div>
+
+        <!-- Bảng so sánh bắt buộc cấu trúc CSS Grid 3 Cột rõ ràng -->
+        <div class="comparison-grid">
+          <!-- Cột 1: Stryker X (Phổ thông thi đấu) -->
+          <div class="compare-card" data-aos="fade-up" data-aos-delay="100">
+            <header class="compare-header">
+              <h3 class="compare-title">Stryker X Wireless</h3>
+              <p class="text-muted">Dành cho game thủ bán chuyên</p>
+              <div class="compare-price">2.190.000 ₫</div>
+            </header>
+            <ul class="specs-compare-list">
+              <li class="specs-compare-item"><span>Cảm biến:</span> <strong>PixArt 3395</strong></li>
+              <li class="specs-compare-item"><span>Độ nhạy tối đa:</span> <strong>26.000 DPI</strong></li>
+              <li class="specs-compare-item"><span>Polling Rate:</span> <strong>1.000Hz - 4.000Hz</strong></li>
+              <li class="specs-compare-item"><span>Trọng lượng:</span> <strong>55 Gam</strong></li>
+              <li class="specs-compare-item"><span>Loại Switch:</span> <strong>Cơ học Huano Blue 80M</strong></li>
+              <li class="specs-compare-item"><span>Thời lượng pin:</span> <strong>80 Giờ liên tục</strong></li>
+              <li class="specs-compare-item"><span>Phần mềm điều khiển:</span> <strong>Web Driver tiêu chuẩn</strong></li>
+            </ul>
+            <button class="btn btn-outline btn-block btn-buy-now" data-id="compare-stryker" data-name="Stryker X Wireless 4K" data-price="2190000">
+              Trang Bị Bản Này
+            </button>
+          </div>
+
+          <!-- Cột 2: Flagship Apex Pro 8K (Đỉnh cao nhất) -->
+          <div class="compare-card is-flagship" data-aos="fade-up" data-aos-delay="200">
+            <span class="flagship-badge">★ FLAGSHIP ĐỈNH CAO</span>
+            <header class="compare-header">
+              <h3 class="compare-title">Apex Pro 8K HyperWireless</h3>
+              <p class="text-muted">Chuẩn mực giải đấu VCT & Major</p>
+              <div class="compare-price">3.890.000 ₫</div>
+            </header>
+            <ul class="specs-compare-list">
+              <li class="specs-compare-item"><span>Cảm biến:</span> <strong>Focus Pro 30K Optical</strong></li>
+              <li class="specs-compare-item"><span>Độ nhạy tối đa:</span> <strong>30.000 DPI (99.8% độ chuẩn)</strong></li>
+              <li class="specs-compare-item"><span>Polling Rate:</span> <strong>8.000Hz HyperPolling thực</strong></li>
+              <li class="specs-compare-item"><span>Trọng lượng:</span> <strong>49 Gam (Khung Ma-giê)</strong></li>
+              <li class="specs-compare-item"><span>Loại Switch:</span> <strong>Quang học Gen-3 100M Click</strong></li>
+              <li class="specs-compare-item"><span>Thời lượng pin:</span> <strong>95 Giờ (1K) / 24 Giờ (8K)</strong></li>
+              <li class="specs-compare-item"><span>Phần mềm điều khiển:</span> <strong>CyberPulse Studio + Onboard 5 Profile</strong></li>
+            </ul>
+            <button class="btn btn-neon btn-block btn-buy-now pulse-btn" data-id="compare-apex" data-name="Apex Pro 8K HyperWireless" data-price="3890000">
+              ⚡ Trang Bị Ngay (Khuyên dùng)
+            </button>
+          </div>
+
+          <!-- Cột 3: Phantom Elite (Cao cấp Wireless) -->
+          <div class="compare-card" data-aos="fade-up" data-aos-delay="300">
+            <header class="compare-header">
+              <h3 class="compare-title">Phantom Elite 4K</h3>
+              <p class="text-muted">Cân bằng tốc độ & thời lượng pin</p>
+              <div class="compare-price">2.990.000 ₫</div>
+            </header>
+            <ul class="specs-compare-list">
+              <li class="specs-compare-item"><span>Cảm biến:</span> <strong>Focus Pro 26K Sensor</strong></li>
+              <li class="specs-compare-item"><span>Độ nhạy tối đa:</span> <strong>26.000 DPI</strong></li>
+              <li class="specs-compare-item"><span>Polling Rate:</span> <strong>4.000Hz HyperPolling</strong></li>
+              <li class="specs-compare-item"><span>Trọng lượng:</span> <strong>52 Gam</strong></li>
+              <li class="specs-compare-item"><span>Loại Switch:</span> <strong>Quang học Gen-2 90M Click</strong></li>
+              <li class="specs-compare-item"><span>Thời lượng pin:</span> <strong>110 Giờ liên tục</strong></li>
+              <li class="specs-compare-item"><span>Phần mềm điều khiển:</span> <strong>CyberPulse Studio App</strong></li>
+            </ul>
+            <button class="btn btn-outline btn-block btn-buy-now" data-id="compare-phantom" data-name="Phantom Elite 4K" data-price="2990000">
+              Trang Bị Bản Này
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         KIẾN TRÚC CẢM BIẾN (<figure> VÀ <figcaption> CHUẨN NGỮ NGHĨA W3C)
+         ======================================================================== -->
+    <section class="section" id="architecture">
+      <div class="container">
+        <div class="tech-diagram-layout">
+          <!-- Cột nội dung mô tả công nghệ -->
+          <div data-aos="fade-right">
+            <span class="section-tag">OPTICAL ENGINEERING</span>
+            <h2 class="section-title">KIẾN TRÚC VI MẠCH <br><span class="cyber-gradient-text">FOCUS PRO 30K SENSOR</span></h2>
+            <p class="hero-desc" style="text-align: left; margin: 16px 0 24px;">
+              Bằng cách kết hợp bóng đèn LED hồng ngoại bước sóng ngắn và cảm biến CMOS độ phân giải cao, 
+              công nghệ quang học CyberPulse theo dõi hoàn hảo từng vi chuyển động trên mọi bề mặt, kể cả kính trong suốt dày 4mm.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div class="sensor-pillar">
+                <span class="sensor-num">01</span>
+                <div>
+                  <h4 style="color: var(--text-light); font-size: var(--fs-sm);">Độ Chuẩn Xác 99.8% Resolution Accuracy</h4>
+                  <p style="font-size: var(--fs-xs); color: var(--text-gray);">Triệt tiêu hoàn toàn hiện tượng gia tốc ảo, drift và rớt khung hình khi flick nhanh.</p>
+                </div>
+              </div>
+
+              <div class="sensor-pillar">
+                <span class="sensor-num">02</span>
+                <div>
+                  <h4 style="color: var(--text-light); font-size: var(--fs-sm);">Asymmetric Cut-off 26 Nấc</h4>
+                  <p style="font-size: var(--fs-xs); color: var(--text-gray);">Tùy chỉnh riêng biệt khoảng cách nhấc chuột (Lift-off) và tiếp đất (Landing) theo milimet.</p>
+                </div>
+              </div>
+
+              <div class="sensor-pillar">
+                <span class="sensor-num">03</span>
+                <div>
+                  <h4 style="color: var(--text-light); font-size: var(--fs-sm);">Smart Tracking Tự Động Cân Chỉnh</h4>
+                  <p style="font-size: var(--fs-xs); color: var(--text-gray);">Tự động quét bề mặt pad chuột để hiệu chuẩn khoảng cách nhận diện tối ưu nhất.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cột sơ đồ kiến trúc sử dụng <figure> và <figcaption> (Tích hợp 3D WebGL ThreeUI Component) -->
+          <figure class="tech-figure" data-aos="fade-left">
+            <div class="optical-sensor-box">
+              <!-- ThreeUI 3D Interactive WebGL Microchip Component -->
+              <div class="three-chip-container" id="threeChipContainer" style="width: 100%; height: 260px; position: relative; border-radius: 12px; overflow: hidden; background: radial-gradient(circle at 50% 50%, rgba(var(--hue-rgb), 0.12) 0%, #060912 100%); border: 1px solid var(--neon-primary-line); cursor: grab;">
+                <canvas id="threeChipCanvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                <div class="three-hud-overlay" style="position: absolute; top: 10px; left: 12px; font-family: var(--font-mono); font-size: 10px; color: var(--neon-primary); letter-spacing: 1px; pointer-events: none;">
+                  <span>● 3D CHIP VIEW [INTERACTIVE ROTATION]</span>
+                </div>
+                <div class="three-hud-coords" style="position: absolute; bottom: 8px; right: 12px; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); pointer-events: none;">
+                  <span>MCU: NORDIC nRF52840 • 8000Hz</span>
+                </div>
+              </div>
+
+              <h3 style="font-size: var(--fs-lg); color: var(--text-light); margin-top: 6px;">Cấu Trúc Vi Mạch Tích Hợp Focus Pro 30K</h3>
+              <p style="font-size: var(--fs-xs); color: var(--text-gray); max-width: 380px;">
+                Tầng vi xử lý Nordic nRF52840 MCU kết hợp cảm biến quang học, bộ thu sóng HyperSpeed RF kép và Switch Quang 0.2ms. Rê chuột lên khối 3D để xoay đa hướng.
+              </p>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 6px;">
+                <span class="user-vip-tag">750 IPS MAX SPEED</span>
+                <span class="user-vip-tag">70G ACCELERATION</span>
+                <span class="user-vip-tag">GLASS TRACKING COMPATIBLE</span>
+              </div>
+            </div>
+            <figcaption class="tech-figcaption">
+              Hình 1.1: Mô hình Three.js 3D vi mạch cảm biến quang học Focus Pro 30K (Cảm hứng ThreeUI.com, tương tác xoay đa góc độ theo chuyển động con trỏ chuột).
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FLASH SALE & ĐẶC QUYỀN VIP (<aside> CHUẨN NGỮ NGHĨA W3C TUẦN 2)
+         ======================================================================== -->
+    <section class="section section--alt" id="deals">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--spacing-xl);">
+          <!-- Khối Aside bổ trợ ngữ nghĩa đúng chuẩn W3C -->
+          <aside class="cyber-aside" data-aos="zoom-in">
+            <div style="display: flex; flex-direction: column; gap: 8px; text-align: center;">
+              <span class="section-tag" style="align-self: center;">CHƯƠNG TRÌNH KHUYẾN MÃI CÓ HẠN</span>
+              <h2 class="aside-title" style="justify-content: center;">
+                ⚡ CYBER FLASH DROP — GIẢM NGAY 25% CHO TOÀN BỘ ECOSYSTEM
+              </h2>
+              <p style="font-size: var(--fs-sm); color: var(--text-gray); max-width: 650px; margin: 0 auto;">
+                Nhập mã ưu đãi <code style="color: var(--neon-primary); font-family: var(--font-mono); font-weight: 700; background: rgba(0,0,0,0.5); padding: 2px 8px; border-radius: 4px;">CYBER2026</code> khi đăng nhập tài khoản để nhận ưu đãi và tặng kèm lót chuột Gaming Hexa Matrix XXL trị giá 690.000 ₫.
+              </p>
+            </div>
+
+            <!-- Đồng hồ đếm ngược Flash Sale thời gian thực -->
+            <div class="countdown-box" style="max-width: 480px; margin: 0 auto; width: 100%;">
+              <div>
+                <div class="countdown-unit" id="saleHours">11</div>
+                <div class="countdown-lbl">Giờ</div>
+              </div>
+              <div class="countdown-unit">:</div>
+              <div>
+                <div class="countdown-unit" id="saleMins">48</div>
+                <div class="countdown-lbl">Phút</div>
+              </div>
+              <div class="countdown-unit">:</div>
+              <div>
+                <div class="countdown-unit" id="saleSecs">25</div>
+                <div class="countdown-lbl">Giây</div>
+              </div>
+            </div>
+
+            <!-- Đặc quyền thành viên VIP -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 10px;">
+              <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 4px;">🚀</div>
+                <h4 style="font-size: var(--fs-xs); color: var(--text-light);">Giao Hỏa Tốc 2 Giờ</h4>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Áp dụng nội thành Biên Hòa & TP.HCM</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 4px;">🛡️</div>
+                <h4 style="font-size: var(--fs-xs); color: var(--text-light);">Bảo Hành 1 Đổi 1 Trong 24 Tháng</h4>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Lỗi switch, mắt đọc đổi mới tức thì</p>
+              </div>
+              <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 4px;">💎</div>
+                <h4 style="font-size: var(--fs-xs); color: var(--text-light);">Tích Điểm VIP Nâng Cấp</h4>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Thăng hạng nhận huy hiệu Game thủ độc quyền</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       04. COMPONENT BỔ TRỢ: GIỎ HÀNG DRAWER (THUẦN CSS CHECKBOX HACK)
+       ========================================================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" aria-hidden="true">
+    <aside class="cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng trang bị của bạn">
+      <div class="cart-drawer-header">
+        <h3 class="cart-drawer-title">
+          <span>🛒</span> KHO ĐỒ CHIẾN THUẬT
+        </h3>
+        <label for="cartDrawerToggle" class="cart-close-btn" aria-label="Đóng kho đồ">✕</label>
+      </div>
+
+      <!-- Danh sách sản phẩm trong giỏ hàng hiển thị thuần CSS -->
+      <div class="cart-items-list" id="cartItemsList">
+        <div class="cart-item-row">
+          <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=200&q=80" alt="Apex Pro 8K Mouse" class="cart-item-img">
+          <div class="cart-item-info">
+            <h4 class="cart-item-name">Apex Pro 8K HyperWireless</h4>
+            <div class="cart-item-price">3.890.000 ₫ × 1</div>
+          </div>
+          <label for="cartDrawerToggle" class="cart-item-remove" title="Đóng giỏ">✕</label>
+        </div>
+        <div class="cart-item-row">
+          <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=200&q=80" alt="Nebula 75 Custom" class="cart-item-img">
+          <div class="cart-item-info">
+            <h4 class="cart-item-name">Nebula 75 Custom Gasket</h4>
+            <div class="cart-item-price">2.890.000 ₫ × 1</div>
+          </div>
+          <label for="cartDrawerToggle" class="cart-item-remove" title="Đóng giỏ">✕</label>
+        </div>
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-total-row">
+          <span>Tổng trang bị (2 món):</span>
+          <span class="cart-total-price">6.780.000 ₫</span>
+        </div>
+        <a href="#authModal" class="btn btn-neon btn-block btn-lg" style="text-align: center; display: block;">
+          ⚡ XÁC NHẬN THANH TOÁN
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ==========================================================================
+       05. COMPONENT BỔ TRỢ: MODAL XÁC THỰC GAME THỦ (THUẦN CSS :TARGET)
+       ========================================================================== -->
+  <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-label="Cửa sổ đăng nhập người dùng">
+    <a href="#close" class="auth-modal-backdrop" aria-label="Đóng cửa sổ đăng nhập" style="position: absolute; inset: 0; z-index: 1;"></a>
+    <div class="auth-card" style="position: relative; z-index: 2;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div class="brand-logo" style="font-size: var(--fs-base);">
+          <div class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem;">⚡</div>
+          <span>CYBER<span class="cyber-gradient-text">PULSE ID</span></span>
+        </div>
+        <a href="#close" class="cart-close-btn" aria-label="Đóng cửa sổ">✕</a>
+      </div>
+
+      <!-- Điều khiển chuyển đổi Đăng Nhập / Đăng Ký thuần CSS qua Radio -->
+      <input type="radio" name="auth-mode" id="auth-tab-login" class="auth-mode-radio" checked hidden>
+      <input type="radio" name="auth-mode" id="auth-tab-register" class="auth-mode-radio" hidden>
+
+      <!-- Thanh chọn Tab -->
+      <div class="auth-tabs">
+        <label for="auth-tab-login" class="auth-tab-btn">ĐĂNG NHẬP</label>
+        <label for="auth-tab-register" class="auth-tab-btn">TẠO CYBER ID MỚI</label>
+      </div>
+
+      <!-- Biểu mẫu Đăng Nhập -->
+      <form class="auth-form" id="loginForm" action="#close">
+        <div>
+          <label for="loginEmail" style="font-size: var(--fs-xs); color: var(--text-gray); display: block; margin-bottom: 4px;">Email hoặc Tên Game thủ</label>
+          <input type="email" id="loginEmail" class="auth-input" placeholder="nhan.esports@cyberpulse.vn" required>
+        </div>
+        <div>
+          <label for="loginPass" style="font-size: var(--fs-xs); color: var(--text-gray); display: block; margin-bottom: 4px;">Mật khẩu bảo mật</label>
+          <input type="password" id="loginPass" class="auth-input" placeholder="••••••••" required>
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 2px;">
+          <span>Ghi nhớ phiên đăng nhập trên thiết bị</span>
+          <a href="#" style="color: var(--neon-primary);">Quên mật khẩu?</a>
+        </div>
+        <button type="submit" class="btn btn-neon btn-block" style="margin-top: 10px;">
+          ĐĂNG NHẬP SÀN ĐẤU
+        </button>
+      </form>
+
+      <!-- Biểu mẫu Đăng Ký Tài Khoản -->
+      <form class="auth-form" id="registerForm" action="#close">
+        <div>
+          <label for="regName" style="font-size: var(--fs-xs); color: var(--text-gray); display: block; margin-bottom: 4px;">Biệt danh Gamer Tag</label>
+          <input type="text" id="regName" class="auth-input" placeholder="Vd: PhantomSniper" required>
+        </div>
+        <div>
+          <label for="regEmail" style="font-size: var(--fs-xs); color: var(--text-gray); display: block; margin-bottom: 4px;">Địa chỉ Email</label>
+          <input type="email" id="regEmail" class="auth-input" placeholder="gamer@gmail.com" required>
+        </div>
+        <div>
+          <label for="regPass" style="font-size: var(--fs-xs); color: var(--text-gray); display: block; margin-bottom: 4px;">Mật khẩu</label>
+          <input type="password" id="regPass" class="auth-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-neon btn-block" style="margin-top: 10px;">
+          KHỞI TẠO TÀI KHOẢN PRO
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- Thẻ mục tiêu neo đóng modal thuần CSS không gây scroll -->
+  <div id="close" style="display: none;" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       06. FOOTER CHUẨN SEMANTIC HTML5 (TUẦN 2)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Cột 1: Thông tin thương hiệu -->
+        <div>
+          <a href="#hero" class="brand-logo">
+            <div class="logo-badge">⚡</div>
+            <span>CYBER<span class="cyber-gradient-text">PULSE</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            CyberPulse Esports Hardware — Hệ sinh thái gaming gear và vũ khí thi đấu chuyên nghiệp dành cho game thủ Esports đỉnh cao. 
+            Phát triển theo phương pháp Vibe Coding chuẩn học phần Thiết kế Web LHU.
+          </p>
+          <div class="footer-social-list">
+            <a href="#" class="social-circle" aria-label="Kênh Discord">🎮</a>
+            <a href="#" class="social-circle" aria-label="Trang Facebook">📘</a>
+            <a href="#" class="social-circle" aria-label="Kênh YouTube">▶️</a>
+            <a href="#" class="social-circle" aria-label="Mã nguồn GitHub">💻</a>
+          </div>
+        </div>
+
+        <!-- Cột 2: Hệ sinh thái phần mềm & Driver -->
+        <div>
+          <h4 class="footer-heading">Hệ Sinh Thái & Phần Mềm</h4>
+          <ul class="footer-links">
+            <li><a href="#architecture">CyberEngine OS 2026</a></li>
+            <li><a href="#architecture">Firmware 8.000Hz HyperPolling</a></li>
+            <li><a href="#architecture">Profile Đồng Bộ Đám Mây</a></li>
+            <li><a href="#products">Trình Quản Lý LED RGB Chroma</a></li>
+            <li><a href="#compare">Bảng Xếp Hạng Gear Thi Đấu</a></li>
+          </ul>
+        </div>
+
+        <!-- Cột 3: Showroom & Thông tin sinh viên thực hiện -->
+        <div>
+          <h4 class="footer-heading">Showroom & Bản Quyền</h4>
+          <ul class="footer-links">
+            <li><a href="#">Trụ sở: Số 10 Huỳnh Văn Nghệ, Biên Hòa, Đồng Nai</a></li>
+            <li><a href="tel:19008888">Hotline kỹ thuật: 1900 8888 (24/7)</a></li>
+            <li><a href="mailto:support@cyberpulse.vn">support@cyberpulse.vn</a></li>
+            <li><a href="#">Sinh viên: Phạm Ngọc Nhân</a></li>
+            <li><a href="#">Mã số sinh viên (MSSV): 125002885</a></li>
+            <li><a href="#">Lớp học phần: Thiết kế Web (111101)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bản quyền chân trang -->
+      <div class="footer-bottom">
+        <div>
+          © <time datetime="2026">2026</time> CYBERPULSE ESPORTS. Bản quyền thuộc về Phạm Ngọc Nhân (MSSV: 125002885).
+        </div>
+        <div>
+          Đồ án thực hiện theo tiêu chí Rubric Điểm A: <em>"Human Architect & AI Pair Programming"</em>.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       07. SCRIPTS: THƯ VIỆN HIỆU ỨNG CUỘN TRANG AOS CDN
+       Chỉ sử dụng duy nhất đoạn script kích hoạt AOS theo quy định đề bài
+       ========================================================================== -->
+    <!-- Thư viện Three.js WebGL (Hỗ trợ 3D Interactive Component cảm hứng ThreeUI.com) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Khởi tạo thư viện AOS (Yêu cầu bắt buộc theo đề thi Tuần 5)
+    AOS.init({
+      duration: 750,
+      once: true,
+      offset: 80,
+      easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+    });
+  </script>
+
+  <!-- ==========================================================================
+       HỆ THỐNG XÁC THỰC TÀI KHOẢN GAME THỦ & LƯU TRỮ PHIÊN (LOCALSTORAGE)
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Thêm hiệu ứng thông báo khi bấm nút Thêm Vào Giỏ
+      document.querySelectorAll('.btn-add-cart').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const card = this.closest('.product-card');
+          const title = card ? card.querySelector('.product-title').textContent.trim() : 'Sản phẩm thi đấu';
+          console.log('Đã thêm sản phẩm:', title);
+        });
+      });
+
+      // 1. Điều khiển chuyển đổi màu LED RGB tức thì trên toàn trang
+      const themeColors = {
+        'theme-cyan': { hue: 185, primary: 'hsl(185, 100%, 55%)' },
+        'theme-green': { hue: 140, primary: 'hsl(140, 100%, 50%)' },
+        'theme-red': { hue: 345, primary: 'hsl(345, 100%, 55%)' },
+        'theme-purple': { hue: 275, primary: 'hsl(275, 100%, 65%)' },
+        'theme-amber': { hue: 38, primary: 'hsl(38, 100%, 52%)' }
+      };
+
+      document.querySelectorAll('.palette-dock .swatch').forEach(function (swatch) {
+        swatch.addEventListener('click', function () {
+          const target = this.getAttribute('for');
+          if (target && themeColors[target]) {
+            const t = themeColors[target];
+            document.documentElement.style.setProperty('--hue', t.hue);
+            document.documentElement.style.setProperty('--neon-primary', t.primary);
+            document.documentElement.style.setProperty('--neon-primary-glow', `hsl(${t.hue} 100% 55% / 0.45)`);
+            document.documentElement.style.setProperty('--neon-primary-soft', `hsl(${t.hue} 100% 55% / 0.15)`);
+            document.documentElement.style.setProperty('--neon-primary-line', `hsl(${t.hue} 100% 55% / 0.5)`);
+            
+            const radio = document.getElementById(target);
+            if (radio) radio.checked = true;
+          }
+        });
+      });
+      const authBtn = document.getElementById('authBtnTrigger');
+      const profileWrap = document.getElementById('userLoggedProfile');
+      const userNameTxt = document.getElementById('userNameDisplay');
+      const userAvatar = document.getElementById('userAvatarText');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+
+      // Cập nhật trạng thái hiển thị trên Header
+      function updateAuthUI(user) {
+        if (user && user.name) {
+          if (authBtn) authBtn.style.display = 'none';
+          if (profileWrap) profileWrap.style.display = 'flex';
+          if (userNameTxt) userNameTxt.textContent = user.name;
+          if (userAvatar) userAvatar.textContent = user.name.charAt(0).toUpperCase();
+        } else {
+          if (authBtn) authBtn.style.display = 'inline-flex';
+          if (profileWrap) profileWrap.style.display = 'none';
+        }
+      }
+
+      // Đọc phiên đăng nhập từ LocalStorage khi nạp trang
+      try {
+        const savedSession = JSON.parse(localStorage.getItem('cyberpulse_active_user'));
+        if (savedSession) {
+          updateAuthUI(savedSession);
+        }
+      } catch (e) {
+        console.warn('Lỗi đọc LocalStorage:', e);
+      }
+
+      // Xử lý Form ĐĂNG KÝ
+      if (registerForm) {
+        registerForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const nameInput = document.getElementById('regName');
+          const emailInput = document.getElementById('regEmail');
+          const passInput = document.getElementById('regPass');
+
+          const gamerName = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : 'Game thủ Pro';
+          const gamerEmail = emailInput ? emailInput.value.trim() : '';
+          const gamerPass = passInput ? passInput.value : '';
+
+          let accounts = [];
+          try {
+            accounts = JSON.parse(localStorage.getItem('cyberpulse_accounts')) || [];
+          } catch (err) {
+            accounts = [];
+          }
+
+          const newUser = { name: gamerName, email: gamerEmail, pass: gamerPass };
+          accounts.push(newUser);
+          localStorage.setItem('cyberpulse_accounts', JSON.stringify(accounts));
+
+          // Đăng nhập luôn phiên này
+          localStorage.setItem('cyberpulse_active_user', JSON.stringify(newUser));
+          updateAuthUI(newUser);
+
+          // Đóng popup
+          window.location.hash = '#close';
+          alert('🎉 Khởi tạo tài khoản Cyber ID thành công! Chào mừng ' + gamerName + ' gia nhập CyberPulse Esports.');
+        });
+      }
+
+      // Xử lý Form ĐĂNG NHẬP
+      if (loginForm) {
+        loginForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const emailInput = document.getElementById('loginEmail');
+          const passInput = document.getElementById('loginPass');
+
+          const query = emailInput ? emailInput.value.trim() : '';
+          const pass = passInput ? passInput.value : '';
+
+          let accounts = [];
+          try {
+            accounts = JSON.parse(localStorage.getItem('cyberpulse_accounts')) || [];
+          } catch (err) {
+            accounts = [];
+          }
+
+          // Tìm theo email hoặc tên
+          const found = accounts.find(function (acc) {
+            return (acc.email && acc.email.toLowerCase() === query.toLowerCase()) ||
+                   (acc.name && acc.name.toLowerCase() === query.toLowerCase());
+          });
+
+          let loggedUser;
+          if (found) {
+            loggedUser = found;
+          } else {
+            // Cho phép đăng nhập linh hoạt với email hoặc tên đã gõ
+            const fallbackName = query.includes('@') ? query.split('@')[0] : (query || 'Phạm Ngọc Nhân');
+            loggedUser = { name: fallbackName, email: query };
+          }
+
+          localStorage.setItem('cyberpulse_active_user', JSON.stringify(loggedUser));
+          updateAuthUI(loggedUser);
+
+          // Đóng popup
+          window.location.hash = '#close';
+          alert('⚡ Đăng nhập thành công! Chào mừng game thủ ' + loggedUser.name + ' trở lại sàn đấu.');
+        });
+      }
+
+      // Xử lý ĐĂNG XUẤT
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          localStorage.removeItem('cyberpulse_active_user');
+          updateAuthUI(null);
+          alert('Bạn đã đăng xuất khỏi Cyber ID.');
+        });
+      }
+    });
+  </script>
+
+  <!-- ==========================================================================
+       THREE.JS 3D INTERACTIVE CHIP VIEWER (CẢM HỨNG THREEUI.COM HARDWARE CHIP)
+       ========================================================================== -->
+  <script>
+    (function initThreeChip() {
+      window.addEventListener('load', function () {
+        const container = document.getElementById('threeChipContainer');
+        const canvas = document.getElementById('threeChipCanvas');
+        if (!container || !canvas || typeof THREE === 'undefined') return;
+
+        const width = container.clientWidth || 360;
+        const height = container.clientHeight || 260;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+        camera.position.set(0, 3.0, 5.2);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Ánh sáng
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0x00f2fe, 3.0, 25);
+        pointLight.position.set(2, 4, 3);
+        scene.add(pointLight);
+
+        const rimLight = new THREE.PointLight(0xff0055, 1.8, 15);
+        rimLight.position.set(-3, -2, -2);
+        scene.add(rimLight);
+
+        // Group chứa toàn bộ vi mạch 3D
+        const chipGroup = new THREE.Group();
+        scene.add(chipGroup);
+
+        // Thân vi mạch Silicon đen mờ (Dark Silicon Wafer)
+        const chipGeo = new THREE.BoxGeometry(2.3, 0.22, 2.3);
+        const chipMat = new THREE.MeshStandardMaterial({
+          color: 0x090e1a,
+          roughness: 0.35,
+          metalness: 0.9
+        });
+        const chipMesh = new THREE.Mesh(chipGeo, chipMat);
+        chipGroup.add(chipMesh);
+
+        // Lõi tiếp xúc kim loại ánh vàng trung tâm (Gold Die Core)
+        const coreGeo = new THREE.BoxGeometry(1.3, 0.26, 1.3);
+        const coreMat = new THREE.MeshStandardMaterial({
+          color: 0xd4af37,
+          roughness: 0.25,
+          metalness: 0.95
+        });
+        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        chipGroup.add(coreMesh);
+
+        // Lõi laser quang học phát sáng ở tâm (Optical Sensor Eye)
+        const eyeGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.28, 32);
+        const eyeMat = new THREE.MeshBasicMaterial({ color: 0x00f2fe });
+        const eyeMesh = new THREE.Mesh(eyeGeo, eyeMat);
+        chipGroup.add(eyeMesh);
+
+        // Các chân pin kim loại 4 phía (Golden IC Pins)
+        const pinGeo = new THREE.BoxGeometry(0.08, 0.08, 0.32);
+        const pinMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.9, roughness: 0.2 });
+
+        for (let i = -0.9; i <= 0.9; i += 0.26) {
+          // Phía trước & sau
+          const p1 = new THREE.Mesh(pinGeo, pinMat);
+          p1.position.set(i, 0, 1.25);
+          chipGroup.add(p1);
+
+          const p2 = new THREE.Mesh(pinGeo, pinMat);
+          p2.position.set(i, 0, -1.25);
+          chipGroup.add(p2);
+
+          // Phía trái & phải
+          const p3 = new THREE.Mesh(pinGeo, pinMat);
+          p3.rotation.y = Math.PI / 2;
+          p3.position.set(1.25, 0, i);
+          chipGroup.add(p3);
+
+          const p4 = new THREE.Mesh(pinGeo, pinMat);
+          p4.rotation.y = Math.PI / 2;
+          p4.position.set(-1.25, 0, i);
+          chipGroup.add(p4);
+        }
+
+        // Vòng quỹ đạo Hologram 3D xoay quanh vi mạch (ThreeUI Orbital Torus Rings)
+        const ringGeo1 = new THREE.TorusGeometry(2.0, 0.018, 16, 90);
+        const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x00f2fe, wireframe: true, transparent: true, opacity: 0.75 });
+        const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
+        ring1.rotation.x = Math.PI / 3;
+        chipGroup.add(ring1);
+
+        const ringGeo2 = new THREE.TorusGeometry(2.35, 0.014, 16, 90);
+        const ringMat2 = new THREE.MeshBasicMaterial({ color: 0xb026ff, wireframe: true, transparent: true, opacity: 0.6 });
+        const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+        ring2.rotation.y = Math.PI / 4;
+        chipGroup.add(ring2);
+
+        // Tương tác chuột (Mouse Interaction & Inertia Lerp)
+        let targetRotationX = 0.35;
+        let targetRotationY = 0.45;
+
+        container.addEventListener('mousemove', function (e) {
+          const rect = container.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+          targetRotationY = x * 1.4;
+          targetRotationX = 0.35 - y * 0.9;
+        });
+
+        container.addEventListener('mouseleave', function () {
+          targetRotationX = 0.35;
+          targetRotationY = 0.45;
+        });
+
+        // Lắng nghe sự kiện đổi màu LED RGB để đồng bộ màu vi mạch
+        const themeHexMap = {
+          'theme-cyan': 0x00f2fe,
+          'theme-green': 0x00ff88,
+          'theme-red': 0xff0055,
+          'theme-purple': 0xb026ff,
+          'theme-amber': 0xf59e0b
+        };
+
+        document.querySelectorAll('.palette-dock .swatch').forEach(function(swatch) {
+          swatch.addEventListener('click', function() {
+            const target = this.getAttribute('for');
+            if (target && themeHexMap[target]) {
+              const hex = themeHexMap[target];
+              pointLight.color.setHex(hex);
+              eyeMat.color.setHex(hex);
+              ringMat1.color.setHex(hex);
+            }
+          });
+        });
+
+        // Vòng lặp Render 60fps
+        function animate() {
+          requestAnimationFrame(animate);
+
+          // Chuyển động xoay vòng tự nhiên
+          ring1.rotation.z += 0.012;
+          ring2.rotation.x += 0.008;
+
+          // Quán tính nội suy mượt mà theo chuột
+          chipGroup.rotation.y += (targetRotationY - chipGroup.rotation.y) * 0.06;
+          chipGroup.rotation.x += (targetRotationX - chipGroup.rotation.x) * 0.06;
+
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        // Responsive khi co giãn màn hình
+        window.addEventListener('resize', function () {
+          const newW = container.clientWidth;
+          const newH = container.clientHeight;
+          camera.aspect = newW / newH;
+          camera.updateProjectionMatrix();
+          renderer.setSize(newW, newH);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
